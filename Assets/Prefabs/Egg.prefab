@@ -75,6 +75,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceVelocity: 9
+  BWall: {fileID: 1229629355175033869, guid: 5da26c66c085be242b91d48edc13533d, type: 3}
+  newPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &-241401415249081665
 MonoBehaviour:
   m_ObjectHideFlags: 0

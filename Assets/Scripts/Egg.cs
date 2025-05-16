@@ -9,16 +9,13 @@ public class Egg : MonoBehaviour
     [SerializeField] private float bounceVelocity;
     private Rigidbody2D rig;
 
+    [SerializeField] private GameObject BWall;
+    public Vector3 newPosition = Vector3.zero;
+
     // Start is called before the first frame update
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -26,10 +23,34 @@ public class Egg : MonoBehaviour
         if (collision.collider.TryGetComponent(out PlayerController PlayerController))
         {
             Bounce(collision.GetContact(0).normal);
+            PointsManager.GamePoints += 1;
         }
     }
     private void Bounce(Vector2 normal)
     {
         rig.velocity = normal * bounceVelocity;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject == BWall)
+        {
+            transform.position = newPosition;
+
+            // Frenar completamente el movimiento
+            rig.velocity = Vector2.zero;
+            rig.angularVelocity = 0f;
+
+            Debug.Log("Tocó a: " + other.gameObject.name);
+            
+            if ((PointsManager.GamePoints-10) >= 0)
+            {
+                PointsManager.GamePoints -= 10;
+            }
+            else
+            {
+                PointsManager.GamePoints = 0;
+            }
+        }
     }
 }

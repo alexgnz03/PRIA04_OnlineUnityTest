@@ -9,6 +9,6 @@ public class Boots : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("SampleScene");
     }
 }
